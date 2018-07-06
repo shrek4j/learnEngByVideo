@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<text class="text-center">恋爱纪念册</text>
+<text class="text-center">700多个日夜，感谢你的陪伴</text>
+<text class="text-center">今后的岁月，我们一起，永不分开</text>
+<image class="center" src="" background-size="cover"></image>
+

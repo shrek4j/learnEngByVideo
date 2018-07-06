@@ -1,0 +1,7 @@
+<view class="page">
+    <view style="margin:20px;font-size:14px;display:inline;color:#aaa;">
+      <block wx:for="{{wds}}" wx:key="index">
+        <text bindtap="ontap" data-wd="{{item}}">{{item}} </text>
+      </block>
+    </view>
+</view>

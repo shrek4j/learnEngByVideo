@@ -1,0 +1,45 @@
+/**index.wxss**/
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #aaa;
+  font-size:14px;
+  margin-top:10px;
+}
+
+.learn-ctrl-bar{
+  margin:10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.learn-progress-bar{
+  margin: 15px 30px 10px 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+.fanting-panel{
+  margin:10px;
+  height:200px;
+  width:95%;
+}
+
+.video-panel{
+  margin:15px 5px 15px 5px;
+  width:100%;
+}
+
+.jingting-panel{
+  padding:20px;
+  margin:10px 30px 10px 30px;
+  font-size:14px;
+  color:#aaa;
+}
