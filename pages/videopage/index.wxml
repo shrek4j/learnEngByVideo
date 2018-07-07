@@ -1,13 +1,13 @@
 <view class="page">
   <!--index.wxml-->
-  <text class="text-center">Top 10 Secrets</text>
-  <text class="text-center">The Food Industry Doesn't Want You To Know</text>
+  <text class="text-center" style='width:80%;padding:10px 10%;'>Top 10 Secrets The Food Industry Doesn't Want You To Know</text>
   <view class="text-center video-panel">
-    <video id="myVideo" src="http://pbdhcvhf6.bkt.clouddn.com/youtube/video/Top_10_Secrets_The_Food_Industry_Doesnt_Want_You_To_Know_240P.mp4" controls="false" show-progress bindtimeupdate="bindtimeupdate" bindplay='bindplay' bindpause='bindpause'></video>
+    <video id="myVideo" src="http://pbdhcvhf6.bkt.clouddn.com/youtube/video/Top_10_Secrets_The_Food_Industry_Doesnt_Want_You_To_Know_240P.mp4" controls bindtimeupdate="bindtimeupdate" bindplay='bindplay' bindpause='bindpause' custom-cache="{{false}}"></video>
   </view>
   <view class="learn-ctrl-bar">
     <button class="weui-btn mini-btn learn-mode" type="primary" size="mini" bindtap="changeLearnMode" wx:if="{{learnMode == 1}}">泛听</button>
     <button class="weui-btn mini-btn learn-mode" type="primary" size="mini" bindtap="changeLearnMode" wx:if="{{learnMode == 2}}">精听</button>
+    <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="changePlayRate">{{playRate}}倍速</button>
   </view>
   <view wx:if="{{learnMode == 1}}">
     <scroll-view class='text-center fanting-panel' scroll-y scroll-with-animation="true" enable-back-to-top="true" scroll-into-view="sub_{{showLine}}">
@@ -19,14 +19,17 @@
   </view>
   <view wx:elif="{{learnMode == 2}}">
     <view class="learn-progress-bar">
-      <button class="weui-btn mini-btn" type="default" size="mini" bindtap="goto" data-step="-1">上一句</button>
-      <button class="weui-btn mini-btn" type="default" size="mini" bindtap="changePlayStatus">{{playBtn}}</button>
-      <button class="weui-btn mini-btn" type="default" size="mini" bindtap="goto" data-step="1">下一句</button>
+      <button class="weui-btn mini-btn progress-btn" size="mini" bindtap="goto" data-step="-1">上一句</button>
+      <button class="weui-btn mini-btn progress-btn" size="mini" bindtap="changePlayStatus">{{playBtn}}</button>
+      <button class="weui-btn mini-btn progress-btn" size="mini" bindtap="goto" data-step="1">下一句</button>
     </view>
     <view class="jingting-panel">
       <block wx:for="{{wds}}">
         <text bindtap="ontap" data-wd="{{item}}">{{item}} </text>
-      </block>
+      </block> 
+    </view>
+    <view>
+      <text>{{wd}}</text>
     </view>
   </view>
 </view>

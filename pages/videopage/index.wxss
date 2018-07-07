@@ -15,7 +15,7 @@
 }
 
 .learn-ctrl-bar{
-  margin:10px;
+  margin:10px 60px;
   display: flex;
   flex-direction: row;
 }
@@ -24,6 +24,11 @@
   margin: 15px 30px 10px 30px;
   display: flex;
   flex-direction: row;
+}
+
+.progress-btn{
+  color:white;
+  background-color:#FF8800;
 }
 
 .fanting-panel{

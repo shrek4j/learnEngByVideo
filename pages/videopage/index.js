@@ -11,11 +11,13 @@ var progressPointer = 0 //泛听计数器
 
 var progressPointer2 = 0 //精听计数器
 var playStatus = 0 // 0 暂停  1 播放  用于精听
+var shouldUpdate = 1
+
+var playRatePointer = 2
+var rates = [0.5,0.8,1.0,1.25,1.5]
+var ratesStr = ["0.5", "0.8", "1.0", "1.2", "1.5"]
+
 Page({
-  data: {
-    motto: 'Hello World',
-    userInfo: {}
-  },
   onLoad: function () {
     var that = this;
     wx.request({
@@ -41,7 +43,8 @@ Page({
           learnMode: learnMode,
           currSub: subArr[0],
           playStatus: playStatus,
-          playBtn:"播放"
+          playBtn:"播放",
+          playRate: ratesStr[playRatePointer]
         });
         that.setCurrSubWds();
       },
@@ -54,8 +57,11 @@ Page({
     videoContext = wx.createVideoContext('myVideo')
   },
   bindtimeupdate : function(e){
+    if(shouldUpdate == 0){
+      return
+    }
     var that = this;
-    var currentTime = e.detail.currentTime
+    var currentTime = parseFloat(e.detail.currentTime)
     if (learnMode == 1){//泛听逻辑  持续播放
       if (progressPointer == 0 || (progressPointer > 0 && currentTime >= timeArr[progressPointer-1])) {//正常播放或前进
         //全部读取完毕
@@ -100,9 +106,9 @@ Page({
         }
       }
     }else{//精听逻辑   循环单句播放
-      if (currentTime >= timeArr[progressPointer2]) {//正常播放或前进
+      if (progressPointer2 == 0 || currentTime + 5 >= timeArr[progressPointer2]) {//正常播放或前进
         if (progressPointer2 < timeArr.length - 1 && currentTime >= timeArr[progressPointer2 + 1]) {
-          if (parseFloat(currentTime) < parseFloat(timeArr[progressPointer2 + 1]) + 1) {//正常单句循环
+          if (currentTime < parseFloat(timeArr[progressPointer2 + 1]) + 5) {//正常单句循环
             videoContext.seek(timeArr[progressPointer2]);
           } else {//跳转到视频当前句
             for (var i = progressPointer2; i < timeArr.length; i++) {
@@ -165,9 +171,11 @@ Page({
     var that = this
     if(learnMode == 1){
       learnMode = 2
+      videoContext.pause();
       videoContext.seek(timeArr[progressPointer2]);
-    }else if(learnMode == 2){
+    }else{
       learnMode = 1
+      videoContext.pause();
       videoContext.seek(timeArr[progressPointer]);
     }
     that.setData({
@@ -175,15 +183,22 @@ Page({
     });
   },
   goto : function (e){
+    shouldUpdate = 0
+    videoContext.pause();
     var that = this
     var step = e.target.dataset.step
+    if(progressPointer2 == 0 && step < 0){
+      shouldUpdate = 1
+      return
+    }
     progressPointer2 = progressPointer2 + parseInt(step)
     //set video
     videoContext.seek(timeArr[progressPointer2]);
-    videoContext.play();
     playStatus = 1
     //set sub
     that.setCurrSubWds();
+    videoContext.play();
+    shouldUpdate = 1
   },
   changePlayStatus : function (){
     var that = this
@@ -237,5 +252,23 @@ Page({
       playBtn: playBtn
     });
   },
-  
+  changePlayRate : function(){
+    var that = this
+    playRatePointer += 1
+    if (playRatePointer == rates.length){
+      playRatePointer = 0
+    }
+    videoContext.playbackRate(rates[playRatePointer]);
+    that.setData({
+      playRate: ratesStr[playRatePointer]
+    })
+  },
+  ontap:function(e){
+    var wd = e.target.dataset.wd
+    var that = this
+    that.setData({
+      wd:wd
+    })
+
+  }
 })
