@@ -15,7 +15,7 @@
 }
 
 .learn-ctrl-bar{
-  margin:10px 60px;
+  margin:10px 40px;
   display: flex;
   flex-direction: row;
 }
@@ -32,19 +32,18 @@
 }
 
 .fanting-panel{
-  margin:10px;
+  margin:20px 10px;
   height:200px;
   width:95%;
 }
 
 .video-panel{
-  margin:15px 5px 15px 5px;
+  margin:10px 0px 15px 0px;
   width:100%;
 }
 
 .jingting-panel{
-  padding:20px;
-  margin:10px 30px 10px 30px;
+  margin:10px 50px 10px 50px;
   font-size:14px;
   color:#aaa;
 }

@@ -13,9 +13,9 @@ var progressPointer2 = 0 //精听计数器
 var playStatus = 0 // 0 暂停  1 播放  用于精听
 var shouldUpdate = 1
 
-var playRatePointer = 2
-var rates = [0.5,0.8,1.0,1.25,1.5]
-var ratesStr = ["0.5", "0.8", "1.0", "1.2", "1.5"]
+var playRatePointer = 1
+var rates = [0.8,1.0,1.25]
+var ratesStr = ["0.8X", "1.0X", "1.2X"]
 
 Page({
   onLoad: function () {
