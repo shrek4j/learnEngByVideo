@@ -1,0 +1,50 @@
+<view class="page">
+  <view wx:if="{{showExplain == 1}}" class="explain">
+    <view class="explain-tag">
+        <view wx:if="{{wordInfo.freq_level == 1}}" class="weui-badge expalin-label" style="background-color:#FFA700;">词频:极高</view>
+        <view wx:elif="{{wordInfo.freq_level == 2}}" class="weui-badge expalin-label" style="background-color:#FFA700;">词频:高</view>
+        <view wx:elif="{{wordInfo.freq_level == 3}}" class="weui-badge expalin-label" style="background-color:#FFA700;">词频:中</view>
+        <view wx:elif="{{wordInfo.freq_level == 4}}" class="weui-badge expalin-label" style="background-color:#FFA700;">词频:低</view>
+        <view wx:elif="{{wordInfo.freq_level == 5}}" class="weui-badge expalin-label" style="background-color:#FFA700;">词频:极低</view>
+        <view  wx:if="{{wordInfo.all_ielts_freq}}" class="weui-badge expalin-label" style="margin-left: 10px;background-color:#FF8C00;">雅思:{{wordInfo.all_ielts_freq}}次</view>
+        <view wx:if="{{wordInfo.kaoyan_tag == 1}}" class="weui-badge expalin-label" style="margin-left: 10px;background-color:#FF4500;">考研核心</view>
+    </view>
+    <view class="weui-panel__bd">  
+      <view class="weui-media-box weui-media-box_text">
+        <view class="weui-media-box__title weui-media-box__title_in-text text-center">
+            <text>{{wordInfo.word}}</text>
+        </view>
+        
+        <view class="weui-media-box__desc explain_row">
+          <view class="weui-badge expalin-label">翻译</view>
+          <block wx:for="{{wordInfo.tranList}}" wx:for-item="item1" wx:key="index">
+            <view style="margin-top:0.2em">{{item1}}</view>
+          </block>
+        </view>
+        <view wx:if="{{roots}}" class="weui-media-box__desc explain_row">
+          <block wx:for="{{roots}}" wx:for-item="item1" wx:key="index">
+            <view style='margin-top:2%;' wx:if="{{item1.morpheme_type==0}}"><view class="weui-badge" style="background-color:#f15a22; border-radius:3px;height:16px;line-height:16px;">词根</view><text bindtap="toRootPage" data-rootid="{{item1.id}}" style='height:16px;line-height:16px;margin-left:10px;'>{{item1.true_root}} : {{item1.meaning}}</text><text wx:if="{{item1.meaning_cn}}">（{{item1.meaning_cn}}）</text></view>
+            <view style='margin-top:2%;' wx:elif="{{item1.morpheme_type==1}}"><view class="weui-badge" style="background-color:#fcaf17;border-radius:3px;height:16px;line-height:16px;">前缀</view><text bindtap="toRootPage" data-rootid="{{item1.id}}" style='height:16px;line-height:16px;margin-left:10px;'>{{item1.true_root}} : {{item1.meaning}}</text><text wx:if="{{item1.meaning_cn}}">（{{item1.meaning_cn}}）</text></view>
+          </block>
+        </view>
+        <view wx:if="{{wordInfo.learn_by_root}}" class="weui-media-box__desc explain_row">
+          <view class="weui-badge expalin-label">词根助记</view>
+          <view>{{wordInfo.learn_by_root}}</view>
+        </view>
+        <view wx:if="{{showSens == 1}}" class="weui-media-box__desc explain_row">
+          <view class="weui-badge expalin-label">例句</view>
+          <block wx:for="{{sens}}" wx:for-item="item1" wx:key="index">
+            <view style='margin-bottom:1.5em;'>
+              <view style="margin-top:0.4em">{{index+1}}.{{item1.sen_en}}</view>
+              <view style="margin-top:0.4em">{{item1.sen_cn}}</view>
+              <view style="margin-top:0.4em">引自：<text style='color:#D3D3D3'>{{item1.source}}</text></view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:elif="{{showExplain == 0}}">
+    <text class="text-center" style="margin-top:20%;">无单词信息</text>
+  </view>
+</view>

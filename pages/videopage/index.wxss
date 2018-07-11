@@ -15,15 +15,16 @@
 }
 
 .learn-ctrl-bar{
-  margin:10px 40px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .learn-progress-bar{
-  margin: 15px 30px 10px 30px;
+  margin-top:10px;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .progress-btn{
@@ -31,10 +32,16 @@
   background-color:#FF8800;
 }
 
+.fanting-subtitle{
+  color: #aaa;
+  font-size:14px;
+  margin:10px 0px 10px 0px;
+}
+
 .fanting-panel{
-  margin:20px 10px;
+  margin:20px 0px 0px 30px;
   height:200px;
-  width:95%;
+  width:85%;
 }
 
 .video-panel{
@@ -43,7 +50,9 @@
 }
 
 .jingting-panel{
-  margin:10px 50px 10px 50px;
-  font-size:14px;
+  margin:20px 30px 20px 30px;
+  font-size:16px;
   color:#aaa;
+  width:85%;
 }
+

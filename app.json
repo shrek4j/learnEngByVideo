@@ -2,6 +2,7 @@
   "pages":[
     "pages/videopage/index",
     "pages/videopage/sentence",
+    "pages/videopage/word",
     "pages/logs/logs"
   ],
   "window":{

@@ -1,0 +1,35 @@
+/**index.wxss**/
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #4C4C4C;
+  font-size:22px;
+}
+
+.explain{
+  margin:10px 10px;
+}
+
+.explain_row{
+  margin-top:1em;
+  margin-left:0.5em;
+}
+
+.expalin-label{
+  background-color:#33AAFF; 
+  border-radius:3px;
+  height:16px;
+  line-height:16px;
+  margin-bottom:5px;
+}
+
+.explain-tag{
+  margin:0px 0px 0px 20px;
+}

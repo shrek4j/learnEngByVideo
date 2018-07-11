@@ -17,6 +17,7 @@ var playRatePointer = 1
 var rates = [0.8,1.0,1.25]
 var ratesStr = ["0.8X", "1.0X", "1.2X"]
 
+var currWord = ""
 Page({
   onLoad: function () {
     var that = this;
@@ -219,10 +220,40 @@ Page({
       playBtn: playBtn
     });
   },
+  /**
+   * 分割句子中的单词
+   */
+  splitSen:function(sen){
+    var wds = []
+    var wd = ""
+    var flag = true
+    for (var i = 0; i < sen.length; i++) {
+      if (sen[i].match(/[a-zA-Z0-9']/)){
+        if(!flag){
+          flag = true
+          wds.push(wd)
+          wd = ""
+        }
+        wd += sen[i]
+      }else{
+        if(flag){
+          flag = false
+          wds.push(wd)
+          wd = ""
+        }
+        wd += sen[i]
+      }
+    }
+    if(wd != ""){
+      wds.push(wd)
+    }
+    return wds
+  },
   setCurrSubWds : function(){
     var that = this
     var currSen = subArr[progressPointer2]
-    var wds = currSen.split(" ")
+    var wds = this.splitSen(currSen)
+    
     that.setData({
       currSen: currSen,
       wds: wds
@@ -263,12 +294,14 @@ Page({
       playRate: ratesStr[playRatePointer]
     })
   },
-  ontap:function(e){
+  showWordExplain: function(e){
     var wd = e.target.dataset.wd
-    var that = this
-    that.setData({
-      wd:wd
+    if(!wd.match(/[a-zA-Z0-9']/)){
+      return
+    }
+    videoContext.pause();
+    wx.navigateTo({
+      url: 'word?wd=' + wd
     })
-
   }
 })

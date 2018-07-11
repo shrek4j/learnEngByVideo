@@ -5,9 +5,9 @@
     <video id="myVideo" src="http://pbdhcvhf6.bkt.clouddn.com/youtube/video/Top_10_Secrets_The_Food_Industry_Doesnt_Want_You_To_Know_240P.mp4" style="width:90%;" controls="{{true}}"	show-center-play-btn="{{false}}" show-play-btn="{{false}}" bindtimeupdate="bindtimeupdate" bindplay='bindplay' bindpause='bindpause' custom-cache="{{false}}"></video>
   </view>
   <view class="learn-ctrl-bar">
-    <button class="weui-btn mini-btn learn-mode" type="primary" size="mini" bindtap="changeLearnMode" wx:if="{{learnMode == 1}}">精听</button>
-    <button class="weui-btn mini-btn learn-mode" type="primary" size="mini" bindtap="changeLearnMode" wx:elif="{{learnMode == 2}}">泛听</button>
-    <button class="weui-btn mini-btn progress-btn" size="mini" bindtap="changePlayStatus">{{playBtn}}</button>
+    <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="changeLearnMode" wx:if="{{learnMode == 1}}">精听</button>
+    <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="changeLearnMode" wx:elif="{{learnMode == 2}}">泛听</button>
+    <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="changePlayStatus">{{playBtn}}</button>
     <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="changePlayRate">{{playRate}}</button>
   </view>
   <view wx:if="{{learnMode == 2}}">
@@ -17,21 +17,21 @@
     </view>
   </view>
   <view wx:if="{{learnMode == 1}}">
-    <scroll-view class='text-center fanting-panel' scroll-y scroll-with-animation="true" enable-back-to-top="true" scroll-into-view="sub_{{showLine}}">
+    <scroll-view class='fanting-panel' scroll-y scroll-with-animation="true" enable-back-to-top="true" scroll-into-view="sub_{{showLine}}">
       <block wx:for="{{subArr}}" wx:key="index">
-        <text bindtap="longTap" data-index="{{index}}" id="sub_{{index}}" class='text-center' style='margin:10px;color:	#FF3030;font-size:16px;' wx:if="{{index == currSubLine}}">{{item}}</text>
-        <text bindtap="longTap" data-index="{{index}}" id="sub_{{index}}" class='text-center' style='margin:10px;' wx:else>{{item}}</text>
+        <view wx:if="{{index == currSubLine}}" data-index="{{index}}" id="sub_{{index}}" class="fanting-subtitle" style='color:#FF3030;font-size:16px;' >{{index+1}}. {{item}}</view>
+        <view wx:else data-index="{{index}}" id="sub_{{index}}" class='fanting-subtitle'>{{index+1}}. {{item}}</view>
       </block>
     </scroll-view>
   </view>
   <view wx:elif="{{learnMode == 2}}">
     <view class="jingting-panel">
-      <block wx:for="{{wds}}">
-        <text bindtap="ontap" data-wd="{{item}}">{{item}} </text>
-      </block> 
+      <view class="sentence">
+        <block wx:for="{{wds}}" wx:key="index">
+          <text bindtap="showWordExplain" data-wd="{{item}}">{{item}}</text>
+        </block> 
+      </view>
     </view>
-    <view>
-      <text>{{wd}}</text>
-    </view>
+    
   </view>
 </view>
